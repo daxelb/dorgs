@@ -1,0 +1,22 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  position: absolute;
+  margin: 0;
+  color: blue;
+  z-index: 1;
+}
+
+canvas {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #0e1318;
+  box-sizing: border-box;
+  border: 2px solid #15de59;
+}
