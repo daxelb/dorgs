@@ -1,0 +1,22 @@
+Class Structure
+- Engine
+- Environment
+- Renderer
+- Grid
+- Cell
+- Org
+- Food
+  - Veggie
+  - Meat
+- Organ
+  - Input
+    - Sight
+      - Color perception - see what something looks like
+        - worse - less color bandwidth
+      - Object identification - see where something is
+        - worse - noisy reading
+     - 
+  - Output
+    - Kill - Schnork can kill another in an adjacent cell
+  - Stomach
+  - 
