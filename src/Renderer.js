@@ -57,11 +57,7 @@ export default class Renderer {
   }
 
   highlightOrg(org) {
-    if (org) {
-      this.highlightCell(org.getCell());
-    } else {
-      this.clearAllHighlights();
-    }
+    org ? this.highlightCell(org.getCell()) : this.clearAllHighlights();
   }
 
   highlightCell(cell) {

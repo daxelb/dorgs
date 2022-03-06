@@ -10,9 +10,8 @@ class Controller {
     this.left_click = false;
     this.middle_click = false;
     this.right_click = false;
-    this.curr_cell = null;
-    this.curr_org = null;
     this.scale = 1;
+    this.highlighted_org = null;
     this.defineEvents();
   }
 
@@ -95,7 +94,9 @@ class Controller {
 
   performAction() {
     if (this.right_click) {
-      this.renderer.highlightOrg(this.curr_org);
+      const curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
+      this.highlighted_org = curr_cell.owner;
+      this.renderer.highlightOrg(this.highlighted_org);
     }
     if (this.middle_click) {
       //drag on middle click
@@ -123,9 +124,6 @@ class Controller {
   mouseUp() {}
 
   mouseDown() {
-    this.curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
-    if (this.curr_cell.owner == null) console.log(this.curr_cell.owner);
-    this.curr_org = this.curr_cell.owner;
     this.start_x = this.mouse_x;
     this.start_y = this.mouse_y;
     this.performAction();
