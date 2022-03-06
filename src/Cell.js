@@ -1,6 +1,6 @@
-const EmptyState = Symbol('empty');
-const FoodState = Symbol('food');
-const OrgState = Symbol('org');
+// const EmptyState = Symbol('empty');
+// const FoodState = Symbol('food');
+// const OrgState = Symbol('org');
 
 const color_scheme = {
   empty: '#0E1318',
@@ -8,7 +8,7 @@ const color_scheme = {
   org: '#60D4FF',
 };
 
-export default class Cell {
+class Cell {
   constructor(state, col, row, x, y) {
     this.owner = null;
     this.setState(state);
@@ -18,8 +18,8 @@ export default class Cell {
     this.y = y;
   }
 
-  setOwner(owner) {
-    this.owner = owner;
+  setOwner(new_owner) {
+    this.owner = new_owner;
   }
 
   setState(state) {
@@ -27,3 +27,5 @@ export default class Cell {
     this.color = color_scheme[state];
   }
 }
+
+export default Cell;

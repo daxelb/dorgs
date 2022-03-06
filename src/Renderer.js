@@ -49,13 +49,14 @@ export default class Renderer {
 
   addToRender(cell) {
     if (this.highlighted_cells.has(cell)) {
+      console.log('higlight me!');
       this.cells_to_highlight.add(cell);
     }
     this.cells_to_render.add(cell);
   }
 
   renderHighlights() {
-    for (var cell of this.cells_to_highlight) {
+    for (let cell of this.cells_to_highlight) {
       this.renderCellHighlight(cell);
       this.highlighted_cells.add(cell);
     }
@@ -74,6 +75,7 @@ export default class Renderer {
   }
 
   renderCellHighlight(cell, color = 'yellow') {
+    console.log('rendering');
     this.renderCell(cell);
     this.ctx.fillStyle = color;
     this.ctx.globalAlpha = 0.5;

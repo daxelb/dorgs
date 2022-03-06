@@ -16,6 +16,9 @@ class Environment {
 
   update() {
     this.total_ticks++;
+    for (let org of this.orgs) {
+      org.update();
+    }
   }
 
   render() {

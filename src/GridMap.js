@@ -47,7 +47,7 @@ class GridMap {
     if (!this.isValidLoc(col, row)) {
       return;
     }
-    this.grid[col][row].setOwner = owner;
+    this.grid[col][row].setOwner(owner);
   }
 
   isValidLoc(col, row) {
