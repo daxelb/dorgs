@@ -12,7 +12,6 @@ class Controller {
     this.right_click = false;
     this.curr_cell = null;
     this.curr_org = null;
-    this.highlight_org = true;
     this.scale = 1;
     this.defineEvents();
   }
@@ -96,7 +95,7 @@ class Controller {
 
   performAction() {
     if (this.left_click) {
-      console.log(this.curr_org);
+      this.renderer.highlightCell(this.curr_cell);
     }
     if (this.middle_click) {
       //drag on middle click
@@ -124,11 +123,7 @@ class Controller {
     if (this.curr_org != prev_org || this.curr_cell != prev_cell) {
       this.renderer.clearAllHighlights(true);
       if (this.curr_org != null) {
-        if (this.highlight_org) {
-          this.renderer.highlightOrg(this.curr_org);
-        } else {
-          this.renderer.highlightCell(this.curr_cell);
-        }
+        this.renderer.highlightCell(this.curr_cell);
       }
     }
   }

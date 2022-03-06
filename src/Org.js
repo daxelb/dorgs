@@ -7,7 +7,6 @@ class Org {
   }
 
   update() {
-    console.log(this.lifetime);
     this.lifetime++;
     this.updateGrid();
   }

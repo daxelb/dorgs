@@ -6,12 +6,12 @@ import Controller from './Controller.js';
 class Environment {
   constructor(cell_size) {
     this.renderer = new Renderer('env-canvas', 'env', cell_size);
-    this.controller = new Controller(this, this.renderer.canvas);
     this.num_rows = Math.ceil(this.renderer.height / cell_size);
     this.num_cols = Math.ceil(this.renderer.width / cell_size);
     this.grid_map = new GridMap(this.num_cols, this.num_rows, cell_size);
     this.orgs = [];
     this.total_ticks = 0;
+    this.controller = new Controller(this, this.renderer.canvas);
   }
 
   update() {

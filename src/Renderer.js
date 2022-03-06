@@ -7,8 +7,7 @@ export default class Renderer {
     this.height = this.canvas.height;
     this.width = this.canvas.width;
     this.cells_to_render = new Set();
-    this.cells_to_highlight = new Set();
-    this.highlighted_cells = new Set();
+    this.highlighted_cell = null;
   }
 
   fillWindow(container_id) {
@@ -28,15 +27,15 @@ export default class Renderer {
   }
 
   renderFullGrid(grid) {
-    for (var col of grid) {
-      for (var cell of col) {
+    for (let col of grid) {
+      for (let cell of col) {
         this.renderCell(cell);
       }
     }
   }
 
   renderCells() {
-    for (var cell of this.cells_to_render) {
+    for (let cell of this.cells_to_render) {
       this.renderCell(cell);
     }
     this.cells_to_render.clear();
@@ -48,49 +47,34 @@ export default class Renderer {
   }
 
   addToRender(cell) {
-    if (this.highlighted_cells.has(cell)) {
-      console.log('higlight me!');
-      this.cells_to_highlight.add(cell);
-    }
     this.cells_to_render.add(cell);
   }
 
   renderHighlights() {
-    for (let cell of this.cells_to_highlight) {
-      this.renderCellHighlight(cell);
-      this.highlighted_cells.add(cell);
-    }
-    this.cells_to_highlight.clear();
-  }
-
-  highlightOrg(org) {
-    for (var org_cell of org.anatomy.cells) {
-      var cell = org.getRealCell(org_cell);
-      this.cells_to_highlight.add(cell);
+    if (this.highlighted_cell) {
+      this.renderCellHighlight(this.highlighted_cell);
     }
   }
 
   highlightCell(cell) {
-    this.cells_to_highlight.add(cell);
+    this.highlighted_cell = cell;
   }
 
   renderCellHighlight(cell, color = 'yellow') {
-    console.log('rendering');
+    if (cell == null) {
+      console.log(cell);
+    }
     this.renderCell(cell);
     this.ctx.fillStyle = color;
     this.ctx.globalAlpha = 0.5;
     this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
     this.ctx.globalAlpha = 1;
-    this.highlighted_cells.add(cell);
   }
 
   clearAllHighlights(clear_to_highlight = false) {
-    for (var cell of this.highlighted_cells) {
-      this.renderCell(cell);
+    if (!!this.highlighted_cell) {
+      this.renderCell(this.highlighted_cell);
     }
-    this.highlighted_cells.clear();
-    if (clear_to_highlight) {
-      this.cells_to_highlight.clear();
-    }
+    this.highlighted_cell = null;
   }
 }

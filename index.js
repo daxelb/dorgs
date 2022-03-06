@@ -66,7 +66,6 @@ console_button.onclick = () => {
 (function () {
   var old = console.log;
   var alpha = Math.min(0.5 + (0.4 * $(this).scrollTop()) / 210, 0.9);
-  console.log(alpha);
   var logger = document.querySelector('#console');
   console.log = function () {
     let logline = document.createElement('span');
@@ -85,8 +84,4 @@ console_button.onclick = () => {
 $('document').ready(function () {
   let engine = new Engine();
   engine.start(60);
-  // var alpha = Math.min(0.5 + 0.4 * $(this).scrollTop() / 210, 0.9);
-  // console.log(alpha)
-  // var channel = Math.round(alpha * 255);
-  // $("#console span").css('color', 'rgba(255,255,255,'+ alpha+ ')');
 });
