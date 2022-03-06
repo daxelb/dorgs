@@ -62,7 +62,7 @@ export default class Renderer {
     this.cells_to_highlight.clear();
   }
 
-  highlightOrganism(org) {
+  highlightOrg(org) {
     for (var org_cell of org.anatomy.cells) {
       var cell = org.getRealCell(org_cell);
       this.cells_to_highlight.add(cell);

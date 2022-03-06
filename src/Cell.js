@@ -18,6 +18,10 @@ export default class Cell {
     this.y = y;
   }
 
+  setOwner(owner) {
+    this.owner = owner;
+  }
+
   setState(state) {
     this.state = state;
     this.color = color_scheme[state];

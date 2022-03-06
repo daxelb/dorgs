@@ -33,7 +33,6 @@ class GridMap {
     if (!this.isValidLoc(col, row)) {
       return null;
     }
-    console.log(this.grid[col][row]);
     return this.grid[col][row];
   }
 
@@ -48,7 +47,7 @@ class GridMap {
     if (!this.isValidLoc(col, row)) {
       return;
     }
-    this.grid[col][row].owner = owner;
+    this.grid[col][row].setOwner = owner;
   }
 
   isValidLoc(col, row) {
