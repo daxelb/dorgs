@@ -51,8 +51,16 @@ export default class Renderer {
   }
 
   renderHighlights() {
-    if (this.highlighted_cell) {
+    if (!!this.highlighted_cell) {
       this.renderCellHighlight(this.highlighted_cell);
+    }
+  }
+
+  highlightOrg(org) {
+    if (org) {
+      this.highlightCell(org.getCell());
+    } else {
+      this.clearAllHighlights();
     }
   }
 
@@ -61,9 +69,6 @@ export default class Renderer {
   }
 
   renderCellHighlight(cell, color = 'yellow') {
-    if (cell == null) {
-      console.log(cell);
-    }
     this.renderCell(cell);
     this.ctx.fillStyle = color;
     this.ctx.globalAlpha = 0.5;
@@ -71,7 +76,7 @@ export default class Renderer {
     this.ctx.globalAlpha = 1;
   }
 
-  clearAllHighlights(clear_to_highlight = false) {
+  clearAllHighlights() {
     if (!!this.highlighted_cell) {
       this.renderCell(this.highlighted_cell);
     }

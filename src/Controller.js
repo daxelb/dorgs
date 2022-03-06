@@ -33,10 +33,10 @@ class Controller {
 
     this.canvas.addEventListener('mousedown', (e) => {
       e.preventDefault();
-      this.updateMouseLocation(e.offsetX, e.offsetY);
       if (e.button == 0) this.left_click = true;
       if (e.button == 1) this.middle_click = true;
       if (e.button == 2) this.right_click = true;
+      this.updateMouseLocation(e.offsetX, e.offsetY);
       this.mouseDown();
     });
 
@@ -94,8 +94,8 @@ class Controller {
   }
 
   performAction() {
-    if (this.left_click) {
-      this.renderer.highlightCell(this.curr_cell);
+    if (this.right_click) {
+      this.renderer.highlightOrg(this.curr_org);
     }
     if (this.middle_click) {
       //drag on middle click
@@ -109,23 +109,11 @@ class Controller {
   }
 
   updateMouseLocation(offsetX, offsetY) {
-    let prev_cell = this.curr_cell;
-    let prev_org = this.curr_org;
-
     this.mouse_x = offsetX;
     this.mouse_y = offsetY;
     let colRow = this.grid_map.xyToColRow(this.mouse_x, this.mouse_y);
     this.mouse_c = colRow[0];
     this.mouse_r = colRow[1];
-    this.curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
-    this.curr_org = this.curr_cell.owner;
-
-    if (this.curr_org != prev_org || this.curr_cell != prev_cell) {
-      this.renderer.clearAllHighlights(true);
-      if (this.curr_org != null) {
-        this.renderer.highlightCell(this.curr_cell);
-      }
-    }
   }
 
   mouseMove() {
@@ -135,6 +123,9 @@ class Controller {
   mouseUp() {}
 
   mouseDown() {
+    this.curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
+    if (this.curr_cell.owner == null) console.log(this.curr_cell.owner);
+    this.curr_org = this.curr_cell.owner;
     this.start_x = this.mouse_x;
     this.start_y = this.mouse_y;
     this.performAction();
