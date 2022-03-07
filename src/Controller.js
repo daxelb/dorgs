@@ -1,3 +1,5 @@
+import Profile from './Profile.js';
+
 class Controller {
   constructor(env, canvas) {
     this.renderer = env.renderer;
@@ -13,6 +15,7 @@ class Controller {
     this.scale = 1;
     this.highlighted_org = null;
     this.defineEvents();
+    this.profile = new Profile();
   }
 
   defineEvents() {
@@ -92,11 +95,15 @@ class Controller {
     $(`#${this.canvas.id}`).css(prop, ass);
   }
 
+  orgProfile() {}
+
   performAction() {
     if (this.right_click) {
       const curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
       this.highlighted_org = curr_cell.owner;
       this.renderer.highlightOrg(this.highlighted_org);
+      this.profile.changeOrg(this.highlighted_org);
+      this.profile.display();
     }
     if (this.middle_click) {
       //drag on middle click
