@@ -64,10 +64,9 @@ export default class Renderer {
     this.highlighted_cell = cell;
   }
 
-  renderCellHighlight(cell, color = 'yellow') {
+  renderCellHighlight(cell, color = 'rgba(255,0,0,1)') {
     this.renderCell(cell);
     this.ctx.fillStyle = color;
-    this.ctx.globalAlpha = 0.5;
     this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
     this.ctx.globalAlpha = 1;
   }

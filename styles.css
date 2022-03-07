@@ -1,3 +1,9 @@
+:root {
+  --panel-color: rgba(0, 0, 0, 0.5);
+  --text-color: rgba(136, 255, 136, 1);
+  --scrollbar-color: rgba(136, 255, 136, 0.5);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -45,7 +51,7 @@ body {
   height: 50px;
   background: rgba(150, 220, 253, 0.5);
   backdrop-filter: blur(5px);
-  color: #8f8;
+  color: var(--text-color);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +63,7 @@ body {
   font-weight: bold;
   font-size: 32px;
   transition: all 1s;
+  outline: none;
 }
 
 #cons {
@@ -75,6 +82,7 @@ body {
 .panel {
   backdrop-filter: blur(5px);
   border-radius: 6px;
+  background: var(--panel-color);
 }
 
 #console > span {
@@ -88,7 +96,6 @@ body {
   display: flex;
   flex-direction: column-reverse;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.3);
   transition: all 1s ease;
 }
 
@@ -98,10 +105,9 @@ body {
 }
 
 #console span {
-  color: rgba(136, 255, 136, 1);
+  color: var(--text-color);
   font-family: monospace;
   font-size: 16px;
-  background: rgba(0, 0, 0, 0);
   transition: all 0.5s ease;
 }
 
@@ -111,7 +117,7 @@ body {
 }
 
 #console::-webkit-scrollbar-thumb {
-  background-color: rgba(136, 255, 136, 0.5);
+  background-color: var(--scrollbar-color);
   border-radius: 3px;
 }
 
@@ -122,7 +128,6 @@ body {
   height: 75vh;
   width: 40vh;
   display: none;
-  background-color: rgba(255, 0, 255, 0.1);
   position: absolute;
   left: 20px;
   top: 50%;
@@ -133,6 +138,8 @@ body {
 }
 
 #org-pos {
+  margin: auto;
+  color: var(--text-color);
   display: flexbox;
   flex-direction: column;
 }

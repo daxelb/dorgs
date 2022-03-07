@@ -4,7 +4,6 @@ import newConsole from './src/newConsole.js';
 
 // sets up new console
 newConsole();
-console.log('3');
 
 let console_button = document.getElementById('console-button');
 let console_hidden = true;
@@ -18,11 +17,8 @@ if (console_hidden) {
   $('#console').css('scroll-top', $('#console').css('scroll-height'));
   $('#console-button').css('background-color', 'rgba(100,200,255,0.1)');
 }
-console.log($('#cons').css('right'));
 
 console_button.onclick = () => {
-  console.log($('#cons').css('right'));
-  // console.log(console_button);
   console_hidden = !console_hidden;
   if (console_hidden) {
     $('#cons').css('right', '-40vw');
@@ -35,7 +31,6 @@ console_button.onclick = () => {
 };
 
 $('document').ready(function () {
-  console.log('1');
   let engine = new Engine();
   engine.start(60);
 });
