@@ -1,16 +1,9 @@
-// const EmptyState = Symbol('empty');
-// const FoodState = Symbol('food');
-// const OrgState = Symbol('org');
-// const color_scheme = {
-//   empty: '#0E1318',
-//   food: '#F82380',
-//   org: '#60D4FF',
-// };
+import { palette } from './constants.js';
 
 class Cell {
   constructor(col, row, x, y, owner = null) {
     this.owner = owner;
-    this.color = this.owner ? this.owner.color : '#0E1318';
+    this.color = this.owner ? this.owner.color : palette.EMPTY;
     this.col = col;
     this.row = row;
     this.x = x;
@@ -19,7 +12,15 @@ class Cell {
 
   setOwner(new_owner) {
     this.owner = new_owner;
-    this.color = this.owner ? this.owner.color : '#0E1318';
+    this.color = this.owner ? this.owner.color : palette.EMPTY;
+  }
+
+  isEmpty() {
+    return this.owner == null;
+  }
+
+  clear() {
+    this.setOwner(null);
   }
 }
 

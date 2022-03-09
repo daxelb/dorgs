@@ -1,46 +1,74 @@
+import { palette, hyperparams } from './constants.js';
+
 class Org {
   constructor(col, row, env, parents = null) {
-    this.color = '#60D4FF';
+    this.color = palette.ORG;
     this.c = col;
     this.r = row;
-    this.env = env;
+    this.grid = env.grid;
+    this.renderer = env.renderer;
     this.lifetime = 0;
-    this.override = false;
-  }
-
-  getCell() {
-    return this.env.grid_map.cellAt(this.c, this.r);
+    this.override = null;
+    this.beingWatched = false;
   }
 
   update() {
+    let choice;
     this.lifetime++;
+    // console.log(this.override);
+
+    if (this.beingWatched) {
+      $('#x').html(this.c);
+      $('#y').html(this.r);
+      $('#lifetime').html(this.lifetime);
+      if (this.override != null) {
+        console.log(this.override);
+        choice = this.override;
+      } else {
+        choice = this.actRandom();
+      }
+    } else {
+      choice = this.actRandom();
+    }
+    this.override = null;
+    this.do(choice);
     this.updateGrid();
   }
 
-  updateGrid() {
-    this.env.grid_map.setCellOwner(this.c, this.r, this);
-    this.env.renderer.addToRender(this.getCell());
+  getCell() {
+    return this.grid.cellAt(this.c, this.r);
   }
 
-  move(direction) {
-    console.log(direction);
-    this.env.grid_map.setCellOwner(this.c, this.r, null);
-    this.env.renderer.addToRender(this.getCell());
-    switch (direction) {
-      case 'up':
-        this.r--;
-        break;
-      case 'left':
-        this.c--;
-        break;
-      case 'right':
-        this.c++;
-        break;
-      case 'down':
-        this.r++;
-        break;
+  updateGrid() {
+    this.grid.setCellOwner(this.c, this.r, this);
+    this.renderer.addToRender(this.getCell());
+  }
+
+  clearCell() {
+    const cell = this.grid.cellAt(this.c, this.r);
+    cell.clear();
+    this.renderer.addToRender(cell);
+  }
+
+  do(direction) {
+    if (direction == 'up' && this.grid.cellAt(this.c, this.r - 1)?.isEmpty()) {
+      this.clearCell();
+      this.r--;
+    } else if (direction == 'left' && this.grid.cellAt(this.c - 1, this.r)?.isEmpty()) {
+      this.clearCell();
+      this.c--;
+    } else if (direction == 'down' && this.grid.cellAt(this.c, this.r + 1)?.isEmpty()) {
+      this.clearCell();
+      this.r++;
+    } else if (direction == 'right' && this.grid.cellAt(this.c + 1, this.r)?.isEmpty()) {
+      this.clearCell();
+      this.c++;
     }
-    this.update();
+  }
+
+  actRandom() {
+    const random_action = hyperparams.ACTIONS[Math.floor(Math.random() * hyperparams.ACTIONS.length)];
+    return random_action;
   }
 }
 

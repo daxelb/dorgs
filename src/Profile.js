@@ -2,27 +2,24 @@ class Profile {
   constructor(org = null) {
     this.org = org;
     this.element = document.getElementById('org-prof');
-    $('#override').click((e) => {
-      this.org.override = !this.org.override;
-      $('#override').css('opacity', this.org.override ? '0.6' : '1');
-      this.updateKeyListener();
-    });
+    this.updateKeyListener();
   }
 
   handleKeyInput = (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {
-      this.org.move('up');
+      this.org.override = 'up';
     } else if (e.key == 'ArrowLeft' || e.key == 'a') {
-      this.org.move('left');
+      this.org.override = 'left';
     } else if (e.key == 'ArrowDown' || e.key == 's') {
-      this.org.move('down');
+      this.org.override = 'down';
     } else if (e.key == 'ArrowRight' || e.key == 'd') {
-      this.org.move('right');
+      this.org.override = 'right';
     }
+    this.updateElement();
   };
 
   updateKeyListener() {
-    if (this.org && this.org.override) {
+    if (this.org && this.org.beingWatched) {
       document.addEventListener('keydown', this.handleKeyInput);
     } else {
       $('#override').css('opacity', 1);
@@ -31,7 +28,8 @@ class Profile {
   }
 
   changeOrg(org) {
-    if (!org && this.org) this.org.override = false;
+    if (this.org) this.org.beingWatched = false;
+    if (org) org.beingWatched = true;
     this.org = org;
     this.updateKeyListener();
     this.updateElement();
@@ -57,6 +55,7 @@ class Profile {
     }
     $('#x').html(this.org.c);
     $('#y').html(this.org.r);
+    $('#lifetime').html(this.org.lifetime);
   }
 }
 

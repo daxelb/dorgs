@@ -32,5 +32,5 @@ console_button.onclick = () => {
 
 $('document').ready(function () {
   let engine = new Engine();
-  engine.start(60);
+  engine.start(1);
 });

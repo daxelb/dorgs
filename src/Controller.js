@@ -1,9 +1,10 @@
 import Profile from './Profile.js';
+import Melon from './Melon.js';
 
 class Controller {
   constructor(env, canvas) {
     this.renderer = env.renderer;
-    this.grid_map = env.grid_map;
+    this.grid = env.grid;
     this.canvas = canvas;
     this.mouse_x;
     this.mouse_y;
@@ -97,8 +98,12 @@ class Controller {
 
   performAction() {
     if (this.left_click) {
-      const curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
-      this.highlighted_org = curr_cell.owner;
+      const clicked = this.grid.cellAt(this.mouse_c, this.mouse_r).owner;
+      if (clicked instanceof Melon) {
+        console.log(clicked.amount);
+        return;
+      }
+      this.highlighted_org = clicked;
       this.renderer.highlightOrg(this.highlighted_org);
       this.profile.changeOrg(this.highlighted_org);
       this.profile.display();
@@ -117,7 +122,7 @@ class Controller {
   updateMouseLocation(offsetX, offsetY) {
     this.mouse_x = offsetX;
     this.mouse_y = offsetY;
-    let colRow = this.grid_map.xyToColRow(this.mouse_x, this.mouse_y);
+    let colRow = this.grid.xyToColRow(this.mouse_x, this.mouse_y);
     this.mouse_c = colRow[0];
     this.mouse_r = colRow[1];
   }

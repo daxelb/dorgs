@@ -1,14 +1,14 @@
 import Environment from './Environment.js';
-// import ColorScheme from './ColorScheme.js';
+// import palettecheme from './palettecheme.js';
 
-const min_render_speed = 60;
+const min_render_speed = 1000;
 
 class Engine {
   constructor() {
-    this.fps = 60;
-    this.env = new Environment(16);
-    // this.colorscheme = new ColorScheme(this.env);
-    // this.colorscheme.loadColorScheme();
+    this.fps = 1000;
+    this.env = new Environment(50);
+    // this.palettecheme = new palettecheme(this.env);
+    // this.palettecheme.loadpalettecheme();
     this.env.OriginOfLife();
 
     this.sim_last_update = Date.now();
@@ -21,7 +21,7 @@ class Engine {
     this.running = false;
   }
 
-  start(fps = 60) {
+  start(fps = 1000) {
     if (fps <= 0) {
       fps = 1;
     }

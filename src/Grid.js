@@ -1,6 +1,6 @@
 import Cell from './Cell.js';
 
-class GridMap {
+class Grid {
   constructor(cols, rows, cell_size) {
     this.resize(cols, rows, cell_size);
   }
@@ -34,6 +34,13 @@ class GridMap {
       return null;
     }
     return this.grid[col][row];
+  }
+
+  clearCellAt(col, row) {
+    if (!this.isValidLoc(col, row)) {
+      return;
+    }
+    this.grid[col][row].setOwner(null);
   }
 
   setCellState(col, row, state) {
@@ -75,4 +82,4 @@ class GridMap {
   }
 }
 
-export default GridMap;
+export default Grid;

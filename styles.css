@@ -5,6 +5,7 @@
   --override-color: rgba(188, 62, 219, 1);
   --select-color: rgba(136, 255, 136, 0.1);
   --button-color: rgba(150, 220, 253, 0.5);
+  cursor: crosshair;
 }
 
 * {

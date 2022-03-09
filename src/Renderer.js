@@ -1,4 +1,4 @@
-import * as consts from './constants.js';
+import { palette } from './constants.js';
 class Renderer {
   constructor(canvas_id, container_id, cell_size) {
     this.cell_size = cell_size;
@@ -57,7 +57,7 @@ class Renderer {
 
   renderHighlight() {
     if (this.highlighted_org) {
-      const color = this.highlighted_org.override ? consts.OVERRIDE_COLOR : consts.HIGHLIGHT_COLOR;
+      const color = this.highlighted_org.override ? palette.OVERRIDE : palette.HIGHLIGHT;
       const cell = this.highlighted_org.getCell();
       this.ctx.fillStyle = color;
       this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
