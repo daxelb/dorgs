@@ -103,6 +103,7 @@ class Controller {
         console.log(clicked.amount);
         return;
       }
+      if (!clicked && this.highlighted_org) this.renderer.clearHighlight();
       this.highlighted_org = clicked;
       this.renderer.highlightOrg(this.highlighted_org);
       this.profile.changeOrg(this.highlighted_org);

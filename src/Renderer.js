@@ -63,6 +63,12 @@ class Renderer {
       this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
     }
   }
+  clearHighlight() {
+    const color = this.highlighted_org.color;
+    const cell = this.highlighted_org.getCell();
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
+  }
 }
 
 export default Renderer;
