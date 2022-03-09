@@ -1,3 +1,3 @@
 # dorgs
-## Artificial Life Simulation using Neuroevolution
+### Artificial Life Simulation using Neuroevolution
 dorg = Digital Organism
