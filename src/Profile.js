@@ -25,6 +25,7 @@ class Profile {
     if (this.org && this.org.override) {
       document.addEventListener('keydown', this.handleKeyInput);
     } else {
+      $('#override').css('opacity', 1);
       document.removeEventListener('keydown', this.handleKeyInput);
     }
   }
