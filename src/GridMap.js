@@ -14,7 +14,7 @@ class GridMap {
     for (let c = 0; c < cols; c++) {
       let row = [];
       for (let r = 0; r < rows; r++) {
-        row.push(new Cell('empty', c, r, c * cell_size, r * cell_size));
+        row.push(new Cell(c, r, c * cell_size, r * cell_size));
       }
       this.grid.push(row);
     }

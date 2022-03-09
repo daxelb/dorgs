@@ -23,7 +23,7 @@ class Environment {
 
   render() {
     this.renderer.renderCells();
-    this.renderer.renderHighlights();
+    this.renderer.renderHighlight();
   }
 
   renderFull() {

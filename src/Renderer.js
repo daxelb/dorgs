@@ -1,4 +1,5 @@
-export default class Renderer {
+import * as consts from './constants.js';
+class Renderer {
   constructor(canvas_id, container_id, cell_size) {
     this.cell_size = cell_size;
     this.canvas = document.getElementById(canvas_id);
@@ -7,7 +8,7 @@ export default class Renderer {
     this.height = this.canvas.height;
     this.width = this.canvas.width;
     this.cells_to_render = new Set();
-    this.highlighted_cell = null;
+    this.highlighted_org = null;
   }
 
   fillWindow(container_id) {
@@ -50,31 +51,18 @@ export default class Renderer {
     this.cells_to_render.add(cell);
   }
 
-  renderHighlights() {
-    if (!!this.highlighted_cell) {
-      this.renderCellHighlight(this.highlighted_cell);
-    }
-  }
-
   highlightOrg(org) {
-    org ? this.highlightCell(org.getCell()) : this.clearAllHighlights();
+    this.highlighted_org = org;
   }
 
-  highlightCell(cell) {
-    this.highlighted_cell = cell;
-  }
-
-  renderCellHighlight(cell, color = 'rgba(255,0,0,1)') {
-    this.renderCell(cell);
-    this.ctx.fillStyle = color;
-    this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
-    this.ctx.globalAlpha = 1;
-  }
-
-  clearAllHighlights() {
-    if (!!this.highlighted_cell) {
-      this.renderCell(this.highlighted_cell);
+  renderHighlight() {
+    if (this.highlighted_org) {
+      const color = this.highlighted_org.override ? consts.OVERRIDE_COLOR : consts.HIGHLIGHT_COLOR;
+      const cell = this.highlighted_org.getCell();
+      this.ctx.fillStyle = color;
+      this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
     }
-    this.highlighted_cell = null;
   }
 }
+
+export default Renderer;

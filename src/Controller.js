@@ -95,10 +95,8 @@ class Controller {
     $(`#${this.canvas.id}`).css(prop, ass);
   }
 
-  orgProfile() {}
-
   performAction() {
-    if (this.right_click) {
+    if (this.left_click) {
       const curr_cell = this.grid_map.cellAt(this.mouse_c, this.mouse_r);
       this.highlighted_org = curr_cell.owner;
       this.renderer.highlightOrg(this.highlighted_org);

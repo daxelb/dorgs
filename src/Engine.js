@@ -6,7 +6,7 @@ const min_render_speed = 60;
 class Engine {
   constructor() {
     this.fps = 60;
-    this.env = new Environment(10);
+    this.env = new Environment(16);
     // this.colorscheme = new ColorScheme(this.env);
     // this.colorscheme.loadColorScheme();
     this.env.OriginOfLife();

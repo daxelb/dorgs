@@ -2,6 +2,9 @@
   --panel-color: rgba(0, 0, 0, 0.5);
   --text-color: rgba(136, 255, 136, 1);
   --scrollbar-color: rgba(136, 255, 136, 0.5);
+  --override-color: rgba(188, 62, 219, 1);
+  --select-color: rgba(136, 255, 136, 0.1);
+  --button-color: rgba(150, 220, 253, 0.5);
 }
 
 * {
@@ -121,25 +124,80 @@ body {
   border-radius: 3px;
 }
 
+#profile-bar {
+  /* position: fixed; */
+  background: var(--scrollbar-color);
+  height: 30px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  padding: 5px;
+  color: rgba(0, 0, 0, 1);
+  width: 100%;
+}
+
 #org-prof {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   top: 50%;
-  height: 75vh;
+  height: 0vh;
   width: 40vh;
-  display: none;
-  position: absolute;
+  display: flex;
+  position: fixed;
   left: 20px;
   top: 50%;
   color: white;
   font-size: 40px;
-  flex-direction: row;
-  text-align: center;
+  flex-direction: column;
 }
 
-#org-pos {
+table {
+  border: none;
+  font-size: 20px;
+  width: 100%;
+}
+
+.stat-name {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.stat-val {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.stat-row {
+  height: 20px;
+  font-size: 25px;
+}
+
+.stat-row:hover {
+  background-color: var(--select-color);
+}
+
+#override-container {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+#override {
+  width: 64px;
+  height: 64px;
+  font-size: 40px;
   margin: auto;
-  color: var(--text-color);
-  display: flexbox;
-  flex-direction: column;
+  padding: 0px;
+  position: absolute;
+  bottom: 20px;
+  background-color: var(--override-color);
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+#override:hover {
+  cursor: pointer;
 }
