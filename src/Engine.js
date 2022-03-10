@@ -1,12 +1,12 @@
 import Environment from './Environment.js';
-// import palettecheme from './palettecheme.js';
+import {hyperparams} from './constants.js';
 
 const min_render_speed = 1000;
 
 class Engine {
   constructor() {
     this.fps = 1000;
-    this.env = new Environment(50);
+    this.env = new Environment(hyperparams.CELL_SIZE);
     // this.palettecheme = new palettecheme(this.env);
     // this.palettecheme.loadpalettecheme();
     this.env.OriginOfLife();

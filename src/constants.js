@@ -7,6 +7,6 @@ export const palette = {
 };
 
 export const hyperparams = {
-  CELL_SIZE: 50,
+  CELL_SIZE: 32,
   ACTIONS: ['up', 'down', 'left', 'right'],
 };
