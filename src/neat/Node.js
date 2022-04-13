@@ -1,12 +1,12 @@
 import { random } from "./activations.js";
 
-class Node {
+export default class Node {
   constructor(number, layer, activation, isOutput) {
     this.number = number
     this.layer = layer
     this.activation = activation;
 
-    this.isOutput = isOutput || false;
+    this.output = isOutput || false;
 
     this.bias = 0;
     this.inputSum = 0;
@@ -41,11 +41,11 @@ class Node {
   }
 
   isOutput() {
-    return this.isOutput;
+    return this.output;
   }
 
   getType() {
-    return this.isInput ? "Input" : this.isOutput ? "Output" : "Hidden"
+    return this.isInput ? "Input" : this.output ? "Output" : "Hidden"
   }
 
   clone() {

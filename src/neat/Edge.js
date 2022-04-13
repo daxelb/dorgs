@@ -1,4 +1,4 @@
-class Edge {
+export default class Edge {
   constructor(from, to, weight) {
     this.fromNode = from;
     this.toNode = to;
