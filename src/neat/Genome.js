@@ -1,4 +1,5 @@
 import { tanh } from './activations.js';
+import Edge from './Edge.js';
 import { intersection } from './utils.js';
 
 export default class Genome {
@@ -12,29 +13,46 @@ export default class Genome {
     this.outputs = outputs
 
     this.defaultActivation = defaultActivation
-    // this.id = "NA" // Genome id -> used for the drawing
+
+    this.unhidden = inputs + outputs
+    this.maxNode = inputs + outputs
     
-    this.nodes = [] // 
-    this.edges = {} // (i, j) -> Edge
+    this.nodes = {} // NodeId : Node
+    this.edges = {} // (i, j) : Edge
+
+    this.fitness = 0
+    this.adjustedFitness = 0
   }
 
 
   generate() {
-    for (let i = 0; i < this.inputs; i++) {
-      this.nodes.push(new Node(this.nodes.length, 0, this.defaultActivation, false));
-    }
-    for (let i = 0; i < this.outputs; i++) {
-      this.nodes.push(new Node(this.nodes.length, 1, this.defaultActivation, true));
+    for (let n = 0; n < this.maxNode; n++) {
+      this.nodes[i] = new Node(this.defaultActivation)
     }
 
     for (let i = 0; i < this.inputs; i++) {
-      for (let j = this.inputs; j < this.outputs + this.inputs; j++) {
-        edge = new Edge(this.nodes[i], this.nodes[j], this.randomWeight())
-        key = edge.toKey()
-        this.edges[key] = edge;
+      for (let j = this.inputs; j < this.unhidden; j++) {
+        this.addEdge(i, j, this.randomWeight());
       }
     }
   }
+
+  nodeIdsToEdgeKey(i, j) {
+    return `${i},${j}`
+  }
+
+  edgeKeyToNodeIds(key) {
+    return [parseInt(key.split(",")[0]), parseInt(key.split(",")[1])]
+  }
+
+  addEdge(i, j, weight) {
+    key = nodeIdsToEdgeKey(i, j)
+    if (key in this.edges)
+      self.edges[key].enabled = True
+    else
+      self.edges[key] = new Edge(weight)
+  }
+
 
 
   randomWeight() {
@@ -45,8 +63,26 @@ export default class Genome {
   forward(inputs) {
     if (inputs.length != self.inputs)
       throw new Error('Incorrect number of inputs.')
+    
+    // Set input values
     for (let i = 0; i < this.inputs; i++)
       this.nodes[i].output = inputs[i]
+    
+    // Generate backward-adjacency list
+    let from = {}
+    for (let n = 0; n < this.maxNode; n++) {
+      from[n] = []
+    }
+
+    let [i, j] = [null, null];
+    this.edges.forEach((edgeKey) => {
+      [i, j] = edgeKeyToNodeIds(edgeKey)
+      if (!this.edges[edgeKey].enabled) {
+        from[j].push(i)
+      }
+    })
+
+    
   }
 
   crossover(partner) {
