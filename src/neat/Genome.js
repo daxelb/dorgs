@@ -1,4 +1,5 @@
 import { tanh } from './activations.js';
+import { intersection } from './utils.js';
 
 export default class Genome {
   /**
@@ -13,26 +14,28 @@ export default class Genome {
     this.defaultActivation = defaultActivation
     // this.id = "NA" // Genome id -> used for the drawing
     
-    this.nextNode = 0
     this.nodes = [] // 
-    this.edges = [] // (i, j) -> Edge
+    this.edges = {} // (i, j) -> Edge
   }
 
 
   generate() {
     for (let i = 0; i < this.inputs; i++) {
-      this.nodes.push(new Node(this.nextNode, 0, this.defaultActivation, false));
+      this.nodes.push(new Node(this.nodes.length, 0, this.defaultActivation, false));
     }
     for (let i = 0; i < this.outputs; i++) {
-      this.nodes.push(new Node(this.nextNode, 1, this.defaultActivation, true));
+      this.nodes.push(new Node(this.nodes.length, 1, this.defaultActivation, true));
     }
 
     for (let i = 0; i < this.inputs; i++) {
       for (let j = this.inputs; j < this.outputs + this.inputs; j++) {
-        this.connections.push(this.nodes[i], this.nodes[j], new Edge(this.randomWeight()));
+        edge = new Edge(this.nodes[i], this.nodes[j], this.randomWeight())
+        key = edge.toKey()
+        this.edges[key] = edge;
       }
     }
   }
+
 
   randomWeight() {
     // return Math.random() * 2 - 1
@@ -52,23 +55,15 @@ export default class Genome {
 }
 
 function genomicCrossover(a, b) {
-  child = Genome(a.inputs, a.outputs, a.defaultActivation);
+  offspring = Genome(a.inputs, a.outputs, a.defaultActivation);
 
   aEdges = new Set(Object.keys(a.edges))
   bEdges = new Set(Object.keys(b.edges))
 
-  intersection(aEdges, bEdges).forEach((e) => {
-    
+  intersection(aEdges, bEdges).forEach((edgeKey) => {
+    parentEdge = coinFlip() ? aEdges[edge] : bEdges[edge]
+    offspring.edges[edgeKey] = parentEdge.deepcopy()
   })
 
 }
 
-function intersection(setA, setB) {
-  const intersection = new Set();
-  for (const elem of setA) {
-    if (setB.has(elem)) {
-      intersection.add(elem);
-    }
-  }
-  return intersection;
-}

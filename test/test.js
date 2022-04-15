@@ -15,4 +15,7 @@ describe('NEAT', () => {
             assert.equal(outputNode.isOutput(), true);
         });
     });
+    describe('Innovation Number', () => {
+        it("In: 1, Out: 4 = ")
+    });
 });

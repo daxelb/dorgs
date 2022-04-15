@@ -1,4 +1,5 @@
 import { random } from "./activations.js";
+import Edge from "./Edge.js";
 
 export default class Node {
   constructor(number, layer, activation, isOutput) {
@@ -57,7 +58,15 @@ export default class Node {
     return clone
   }
 
+  deepclone() {
+    let deepclone = this.clone();
+    newOutputEdges = []
+    deepclone.outputEdges.forEach((edge) => {
+      newOutputEdges.push(new Edge(deepclone, edge.toNode, edge.weight))
+    })
+  }
+
   toString() {
-    return `[${this.getType()}Node_${this.number}=${this.value}]`
+    return `<Node ${this.number} ${this.getType()} val=${this.value}>`
   }
 }
