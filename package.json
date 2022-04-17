@@ -11,17 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^13.2.1",
     "chai": "^4.3.6",
-    "chance": "^1.1.8",
     "express": "^4.17.3",
     "flatted": "^3.2.5",
-    "http-server": "^14.1.0",
     "itertools": "^1.7.1",
     "open": "^8.4.0",
-    "random-seedable": "^1.0.8",
-    "set-utils": "^1.0.4",
-    "weighted": "^1.0.0"
+    "set-utils": "^1.0.4"
   },
   "devDependencies": {
     "mocha": "^9.2.2",
