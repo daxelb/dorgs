@@ -1,6 +1,10 @@
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
+// let http = require('http');
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import open from 'open';
+// let fs = require('fs');
+// let path = require('path');
 
 http
   .createServer(function (request, response) {
@@ -16,18 +20,6 @@ http
       '.html': 'text/html',
       '.js': 'text/javascript',
       '.css': 'text/css',
-      '.json': 'application/json',
-      '.png': 'image/png',
-      '.jpg': 'image/jpg',
-      '.gif': 'image/gif',
-      '.svg': 'image/svg+xml',
-      '.wav': 'audio/wav',
-      '.mp4': 'video/mp4',
-      '.woff': 'application/font-woff',
-      '.ttf': 'application/font-ttf',
-      '.eot': 'application/vnd.ms-fontobject',
-      '.otf': 'application/font-otf',
-      '.wasm': 'application/wasm',
     };
 
     var contentType = mimeTypes[extname] || 'application/octet-stream';
@@ -41,9 +33,7 @@ http
           });
         } else {
           response.writeHead(500);
-          response.end(
-            'Sorry, check with the site admin for error: ' + error.code + ' ..\n'
-          );
+          response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
         }
       } else {
         response.writeHead(200, { 'Content-Type': contentType });
@@ -53,3 +43,4 @@ http
   })
   .listen(3000);
 console.log('Server running at http://127.0.0.1:3000/');
+open('http://127.0.0.1:3000/');

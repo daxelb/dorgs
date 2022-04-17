@@ -1,5 +1,5 @@
 import Environment from './Environment.js';
-import {hyperparams} from './constants.js';
+import { hyperparams } from './constants.js';
 
 const min_render_speed = 1000;
 
@@ -85,7 +85,7 @@ class Engine {
   necessaryUpdate() {
     this.env.render();
     // this.controlpanel.update(this.ui_delta_time);
-    // this.organism_editor.update();
+    // this.dorganism_editor.update();
   }
 }
 
