@@ -14,7 +14,7 @@ export default class Specie {
   reproduce() {
     let child;
     if (hyperparams.reproduceSexually()) {
-      child = random.pickone(this.members).clone();
+      child = random.choice(this.members).clone();
       child.mutate();
       return child;
     }

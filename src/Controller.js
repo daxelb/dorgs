@@ -14,7 +14,7 @@ class Controller {
     this.middle_click = false;
     this.right_click = false;
     this.scale = 1;
-    this.highlighted_org = null;
+    this.highlighted_dorg = null;
     this.defineEvents();
     this.profile = new Profile();
   }
@@ -103,10 +103,10 @@ class Controller {
         console.log(clicked.amount);
         return;
       }
-      if (!clicked && this.highlighted_org) this.renderer.clearHighlight();
-      this.highlighted_org = clicked;
-      this.renderer.highlightOrg(this.highlighted_org);
-      this.profile.changeOrg(this.highlighted_org);
+      if (!clicked && this.highlighted_dorg) this.renderer.clearHighlight();
+      this.highlighted_dorg = clicked;
+      this.renderer.highlightDorg(this.highlighted_dorg);
+      this.profile.changeDorg(this.highlighted_dorg);
       this.profile.display();
     }
     if (this.middle_click) {

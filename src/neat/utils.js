@@ -12,7 +12,7 @@ export function edgeKeyToNodeIds(key) {
  * Assigns on natural number to each pair of
  * natural numbers. A pair of integers will
  * result in an integer result.
- * Source: https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function
+ * Source: https://en.wikipedia.dorg/wiki/Pairing_function#Cantor_pairing_function
  * @param {*} a A natural number
  * @param {*} b A natural number
  */

@@ -1,5 +1,4 @@
-import { Chance } from 'chance';
-import { modifiedSigmoidalTransfer } from './neat/activations.js';
+import Random from './Random.js';
 
 export const palette = {
   HIGHLIGHT: 'rgb(255,0,0)',
@@ -14,7 +13,7 @@ export const hyperparams = {
   ACTIONS: ['up', 'down', 'left', 'right'],
 };
 
-export const random = new Chance();
+export const random = new Random();
 
 // export const mutationProbs = {
 //   "weights": 0.8,

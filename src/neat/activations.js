@@ -27,5 +27,5 @@ export const relu = (x) => {
 
 export const randomActivation = () => {
   const activations = [identity, sigmoid, tanh, relu];
-  return random.pickone(activations);
+  return random.choice(activations);
 };

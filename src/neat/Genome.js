@@ -34,7 +34,7 @@ export default class Genome {
 
     for (let i = 0; i < this.inputs; i++) {
       for (let j = this.inputs; j < this.unhidden; j++) {
-        this.addEdge(i, j, random.random(-1, 1));
+        this.addEdge(i, j, random.uniform(-1, 1));
       }
     }
     return true;
@@ -88,19 +88,19 @@ export default class Genome {
         break;
       case 'edge':
         const [i, j] = this.randomPair();
-        this.addEdge(i, j, random.random(-1, 1));
+        this.addEdge(i, j, random.uniform(-1, 1));
         break;
       case 'weightSet':
-        this.randomEdge().weight = random.random(-1, 1);
+        this.randomEdge().weight = random.uniform(-1, 1);
         break;
       case 'weightPerturb':
-        this.randomEdge().weight += random.random(-1, 1);
+        this.randomEdge().weight += random.uniform(-1, 1);
         break;
       case 'biasSet':
-        this.randomNode().bias = random.random(-1, 1);
+        this.randomNode().bias = random.uniform(-1, 1);
         break;
       case 'biasPerturb':
-        this.randomNode().bias += random.random(-1, 1);
+        this.randomNode().bias += random.uniform(-1, 1);
         break;
     }
   }
@@ -108,14 +108,14 @@ export default class Genome {
   // MUTATE HELPERS
   addEnabled() {
     const enabled = getDisabled();
-    const randomEdgeKey = random.pickone(enabled);
+    const randomEdgeKey = random.choice(enabled);
     const edge = this.edges[randomEdgeKey];
     edge.enabled = true;
   }
 
   addNode() {
     const enabled = getEnabled();
-    const randomEdgeKey = random.pickone(enabled);
+    const randomEdgeKey = random.choice(enabled);
     const [i, j] = edgeKeyToNodeIds(randomEdgeKey);
     const edge = this.edges[randomEdgeKey];
     edge.enabled = false;
@@ -135,24 +135,24 @@ export default class Genome {
   }
 
   randomPair() {
-    const i = random.pickone(this.getNonOutputIndices());
+    const i = random.choice(this.getNonOutputIndices());
     const jArr = this.getNonInputIndices;
     let j;
     if (jArr.length == 1 && i in jArr) {
       j = this.maxNode;
       this.addNode();
     } else {
-      j = random.pickone(jArr);
+      j = random.choice(jArr);
     }
     return [i, j];
   }
 
   randomEdge() {
-    return random.pickone(Object.values(this.edges));
+    return random.choice(Object.values(this.edges));
   }
 
   randomNode() {
-    return random.pickone(Object.values(this.nodes));
+    return random.choice(Object.values(this.nodes));
   }
 
   // HELPERS

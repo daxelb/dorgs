@@ -1,4 +1,5 @@
 import { random } from '../constants.js';
+import weighted from 'weighted';
 import { modifiedSigmoidalTransfer } from './activations.js';
 
 export default class Hyperparameters {
@@ -35,7 +36,7 @@ export default class Hyperparameters {
   }
 
   getReproductionType() {
-    return random.weighted(['sexual', 'asexual'], [this.sexual, 1 - this.sexual]);
+    return weighted(['sexual', 'asexual'], [this.sexual, 1 - this.sexual], random);
   }
 
   reproduceSexually() {
@@ -43,6 +44,6 @@ export default class Hyperparameters {
   }
 
   getMutationType() {
-    return random.weighted(Object.keys(this.mutation), Object.values(this.mutation));
+    return weighted(Object.keys(this.mutation), Object.values(this.mutation), random);
   }
 }

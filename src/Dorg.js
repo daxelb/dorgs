@@ -1,12 +1,12 @@
 import { palette, hyperparams, random } from './constants.js';
+import { range } from './neat/utils.js';
+import Entity from './Entity.js';
 
-class Org {
+class Dorg extends Entity {
   constructor(col, row, env, parents = null) {
+    super(col, row, env);
     this.color = palette.ORG;
-    this.c = col;
-    this.r = row;
     this.grid = env.grid;
-    this.renderer = env.renderer;
     this.lifetime = 0;
     this.override = null;
     this.beingWatched = false;
@@ -35,21 +35,6 @@ class Org {
     this.updateGrid();
   }
 
-  getCell() {
-    return this.grid.cellAt(this.c, this.r);
-  }
-
-  updateGrid() {
-    this.grid.setCellOwner(this.c, this.r, this);
-    this.renderer.addToRender(this.getCell());
-  }
-
-  clearCell() {
-    const cell = this.grid.cellAt(this.c, this.r);
-    cell.clear();
-    this.renderer.addToRender(cell);
-  }
-
   do(direction) {
     if (direction == 'up' && this.grid.cellAt(this.c, this.r - 1)?.isEmpty()) {
       this.clearCell();
@@ -67,8 +52,34 @@ class Org {
   }
 
   actRandom() {
-    return random.pickone(hyperparams.ACTIONS);
+    return random.choice(hyperparams.ACTIONS);
+  }
+
+  see() {
+    let foodLoc = this.sightRange;
+    for (let [c, r] of this.seeHelper()) {
+      if (this.grid.cellAt(c, r)) {
+      }
+    }
+  }
+
+  /**
+   * Manhattan distance
+   * @param {*} c
+   * @param {*} r
+   * @returns
+   */
+  distanceTo(c, r) {
+    return Math.abs(this.c - c) + Math.abs(this.r - r);
+  }
+
+  *seeHelper() {
+    for (let r of range(this.r - 2, this.r + 3)) {
+      for (let c of range(this.c - 2, this.r + 3)) {
+        yield [c, r];
+      }
+    }
   }
 }
 
-export default Org;
+export default Dorg;

@@ -1,25 +1,25 @@
 class Profile {
-  constructor(org = null) {
-    this.org = org;
-    this.element = document.getElementById('org-prof');
+  constructor(dorg = null) {
+    this.dorg = dorg;
+    this.element = document.getElementById('dorg-prof');
     this.updateKeyListener();
   }
 
   handleKeyInput = (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {
-      this.org.override = 'up';
+      this.dorg.override = 'up';
     } else if (e.key == 'ArrowLeft' || e.key == 'a') {
-      this.org.override = 'left';
+      this.dorg.override = 'left';
     } else if (e.key == 'ArrowDown' || e.key == 's') {
-      this.org.override = 'down';
+      this.dorg.override = 'down';
     } else if (e.key == 'ArrowRight' || e.key == 'd') {
-      this.org.override = 'right';
+      this.dorg.override = 'right';
     }
     this.updateElement();
   };
 
   updateKeyListener() {
-    if (this.org && this.org.beingWatched) {
+    if (this.dorg && this.dorg.beingWatched) {
       document.addEventListener('keydown', this.handleKeyInput);
     } else {
       $('#override').css('opacity', 1);
@@ -27,21 +27,21 @@ class Profile {
     }
   }
 
-  changeOrg(org) {
-    if (this.org) this.org.beingWatched = false;
-    if (org) org.beingWatched = true;
-    this.org = org;
+  changeDorg(dorg) {
+    if (this.dorg) this.dorg.beingWatched = false;
+    if (dorg) dorg.beingWatched = true;
+    this.dorg = dorg;
     this.updateKeyListener();
     this.updateElement();
   }
 
   on() {
-    return !!this.org;
+    return !!this.dorg;
   }
 
   display() {
     if (this.on()) {
-      $('#org-prof').animate({ height: '75vh', opacity: '1' }, 200).show();
+      $('#dorg-prof').animate({ height: '75vh', opacity: '1' }, 200).show();
     } else {
       this.element.style.display = 'none';
       this.element.style.height = '0vh';
@@ -53,9 +53,9 @@ class Profile {
     if (!this.on()) {
       return;
     }
-    $('#x').html(this.org.c);
-    $('#y').html(this.org.r);
-    $('#lifetime').html(this.org.lifetime);
+    $('#x').html(this.dorg.c);
+    $('#y').html(this.dorg.r);
+    $('#lifetime').html(this.dorg.lifetime);
   }
 }
 

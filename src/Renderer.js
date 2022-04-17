@@ -8,7 +8,7 @@ class Renderer {
     this.height = this.canvas.height;
     this.width = this.canvas.width;
     this.cells_to_render = new Set();
-    this.highlighted_org = null;
+    this.highlighted_dorg = null;
   }
 
   fillWindow(container_id) {
@@ -51,21 +51,21 @@ class Renderer {
     this.cells_to_render.add(cell);
   }
 
-  highlightOrg(org) {
-    this.highlighted_org = org;
+  highlightDorg(dorg) {
+    this.highlighted_dorg = dorg;
   }
 
   renderHighlight() {
-    if (this.highlighted_org) {
-      const color = this.highlighted_org.override ? palette.OVERRIDE : palette.HIGHLIGHT;
-      const cell = this.highlighted_org.getCell();
+    if (this.highlighted_dorg) {
+      const color = this.highlighted_dorg.override ? palette.OVERRIDE : palette.HIGHLIGHT;
+      const cell = this.highlighted_dorg.getCell();
       this.ctx.fillStyle = color;
       this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
     }
   }
   clearHighlight() {
-    const color = this.highlighted_org.color;
-    const cell = this.highlighted_org.getCell();
+    const color = this.highlighted_dorg.color;
+    const cell = this.highlighted_dorg.getCell();
     this.ctx.fillStyle = color;
     this.ctx.fillRect(cell.x, cell.y, this.cell_size, this.cell_size);
   }
