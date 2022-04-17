@@ -1,14 +1,11 @@
-export let innovNum = 0;
-export let genInnovs = {};
+import { random } from '../constants.js';
 
-export function intersection(setA, setB) {
-  const intersection = new Set();
-  for (const elem of setA) {
-    if (setB.has(elem)) {
-      intersection.add(elem);
-    }
-  }
-  return intersection;
+export function nodeIdsToEdgeKey(i, j) {
+  return `${i},${j}`;
+}
+
+export function edgeKeyToNodeIds(key) {
+  return [parseInt(key.split(',')[0]), parseInt(key.split(',')[1])];
 }
 
 /**
@@ -23,6 +20,10 @@ export function cantorPairing(a, b) {
   return (1 / 2) * (a + b) * (a + b + 1) + b;
 }
 
-export function coinFlip() {
-  return Math.random() > 0.5;
+export function* range(...args) {
+  let [start, stop, step] = [null, null, null];
+  if (args.length == 3) [start, stop, step] = args;
+  else if (args.length == 2) [start, stop, step] = [args[0], args[1], 1];
+  else if (args.length == 1) [start, stop, step] = [0, args[0], 1];
+  for (let i = start; i < stop; i += step) yield i;
 }

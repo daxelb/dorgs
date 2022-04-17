@@ -1,4 +1,4 @@
-import { palette, hyperparams } from './constants.js';
+import { palette, hyperparams, random } from './constants.js';
 
 class Org {
   constructor(col, row, env, parents = null) {
@@ -67,8 +67,7 @@ class Org {
   }
 
   actRandom() {
-    const random_action = hyperparams.ACTIONS[Math.floor(Math.random() * hyperparams.ACTIONS.length)];
-    return random_action;
+    return random.pickone(hyperparams.ACTIONS);
   }
 }
 

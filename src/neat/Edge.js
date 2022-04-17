@@ -1,6 +1,10 @@
 export default class Edge {
-  constructor(from, to, weight) {
+  constructor(weight) {
     this.weight = weight;
     this.enabled = true;
+  }
+
+  clone() {
+    return new Edge(this.weight, this.enabled);
   }
 }

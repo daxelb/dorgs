@@ -1,6 +1,6 @@
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
+let http = require('http');
+let fs = require('fs');
+let path = require('path');
 
 http
   .createServer(function (request, response) {
@@ -41,9 +41,7 @@ http
           });
         } else {
           response.writeHead(500);
-          response.end(
-            'Sorry, check with the site admin for error: ' + error.code + ' ..\n'
-          );
+          response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
         }
       } else {
         response.writeHead(200, { 'Content-Type': contentType });
