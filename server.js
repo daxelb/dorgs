@@ -1,10 +1,7 @@
-// let http = require('http');
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import open from 'open';
-// let fs = require('fs');
-// let path = require('path');
 
 http
   .createServer(function (request, response) {
