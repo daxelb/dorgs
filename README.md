@@ -3,7 +3,15 @@
 dorg = Digital Organism
 
 # Installation
-`git clone https://github.com/axelbrowne/dorgs`
-`cd dorgs`
-`npm install -d`
-`node server.js`
+```
+git clone https://github.com/axelbrowne/dorgs
+```
+```
+cd dorgs
+```
+```
+npm install -d
+```
+```
+node server.js
+```
