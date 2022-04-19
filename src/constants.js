@@ -4,7 +4,7 @@ export const palette = {
   HIGHLIGHT: 'rgb(255,0,0)',
   OVERRIDE: '#00ff00',
   EMPTY: '#0E1318',
-  MELON: 'rgb(255,154,77)',
+  MELON: 'rgb(255,154,77, 0.5)',
   ORG: '#60D4FF',
 };
 

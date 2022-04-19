@@ -1,6 +1,6 @@
-import { hyperparams } from './constants';
-import { random } from '../constants';
-import { genomicDistance } from './crossover';
+import { hyperparams } from './constants.js';
+import { random } from '../constants.js';
+import { genomicDistance } from './crossover.js';
 import { max, sorted, sum } from 'itertools';
 
 export default class Specie {

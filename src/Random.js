@@ -1,6 +1,6 @@
 // Contributors: Axel Browne, Victor Quinn
 
-export default class Random {
+class Random {
   constructor(seed) {
     this.seed = seed;
     this.generator = new MersenneTwister(seed);
@@ -261,3 +261,5 @@ MersenneTwister.prototype.random = function () {
   return this.genrand_int32() * (1.0 / 4294967296.0);
   /* divided by 2^32 */
 };
+
+export default Random;

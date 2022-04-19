@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-// import { random } from '../src/constants.js';
+// import random from '../src/Random.js';
 import { allEqual } from './utils.js';
 import { sum } from 'itertools';
 import Genome from '../src/neat/Genome.js';
