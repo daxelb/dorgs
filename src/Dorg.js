@@ -1,6 +1,7 @@
 import { palette, hyperparams, random } from './constants.js';
 import { range } from './neat/utils.js';
 import Entity from './Entity.js';
+import Melon from './Melon.js'
 
 class Dorg extends Entity {
   constructor(col, row, env, parents = null) {
@@ -9,18 +10,19 @@ class Dorg extends Entity {
     this.grid = env.grid;
     this.lifetime = 0;
     this.override = null;
+    this.food = 0;
     this.beingWatched = false;
   }
 
   update() {
     let choice;
     this.lifetime++;
-    // console.log(this.override);
 
     if (this.beingWatched) {
       $('#x').html(this.c);
       $('#y').html(this.r);
       $('#lifetime').html(this.lifetime);
+      $('#food').html(this.food);
       if (this.override != null) {
         console.log(this.override);
         choice = this.override;
@@ -35,20 +37,59 @@ class Dorg extends Entity {
     this.updateGrid();
   }
 
+  getLegalActions() {
+    let legalActions = [];
+    if (this.r + 1 < this.grid.rows)
+      legalActions.push('down')
+    if (this.r - 1 >= 0)
+      legalActions.push('up')
+    if (this.c + 1 < this.grid.cols)
+      legalActions.push('right')
+    if (this.c - 1 >= 0)
+      legalActions.push('left')
+    return legalActions
+  }
+
+  tryEat() {
+    const cell = this.grid.cellAt(this.c, this.r)
+    if (cell.owner instanceof Melon) {
+      const melon = cell.owner;
+      this.food += melon.amount
+      melon.amount = 0
+      cell.owner = this
+    }
+  }
+
+  onMelon() {
+    return this.grid.cellAt(this.c, this.r).hasMelon()
+  }
+
+  eatMelon() {
+    this.food += this.grid.cellAt
+  }
+  
+  canMove(direction) {
+    return this.getLegalActions().includes(direction)
+  }
+
   do(direction) {
-    if (direction == 'up' && this.grid.cellAt(this.c, this.r - 1)?.isEmpty()) {
+    if (!this.canMove(direction)) {
+      return
+    }
+    if (direction == 'up') {
       this.clearCell();
       this.r--;
-    } else if (direction == 'left' && this.grid.cellAt(this.c - 1, this.r)?.isEmpty()) {
+    } else if (direction == 'left') {
       this.clearCell();
       this.c--;
-    } else if (direction == 'down' && this.grid.cellAt(this.c, this.r + 1)?.isEmpty()) {
+    } else if (direction == 'down') {
       this.clearCell();
       this.r++;
-    } else if (direction == 'right' && this.grid.cellAt(this.c + 1, this.r)?.isEmpty()) {
+    } else if (direction == 'right' ) {
       this.clearCell();
       this.c++;
     }
+    this.tryEat()
   }
 
   actRandom() {

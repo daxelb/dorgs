@@ -9,7 +9,7 @@ class Engine {
     this.env = new Environment(hyperparams.CELL_SIZE);
     // this.palettecheme = new palettecheme(this.env);
     // this.palettecheme.loadpalettecheme();
-    this.env.OriginOfLife();
+    this.env.origin();
 
     this.sim_last_update = Date.now();
     this.sim_delta_time = 0;

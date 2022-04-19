@@ -31,9 +31,7 @@ export default class Random {
     while (indicies.size < n) {
       indicies.add(this.integer(0, arr.length));
     }
-    return [...indicies].map((i) => {
-      arr[i];
-    });
+    return [...indicies].map((i) => arr[i] );
   }
 
   /**

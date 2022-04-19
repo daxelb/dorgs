@@ -13,6 +13,8 @@ export const hyperparams = {
   ACTIONS: ['up', 'down', 'left', 'right'],
 };
 
+export const growChance = 0.3;
+
 export const random = new Random();
 
 // export const mutationProbs = {

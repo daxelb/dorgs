@@ -19,6 +19,10 @@ class Cell {
     return this.owner == null;
   }
 
+  hasFood() {
+    return typeof this.owner === "Melon" 
+  }
+
   clear() {
     this.setOwner(null);
   }

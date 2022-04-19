@@ -26,7 +26,7 @@ class Entity {
   }
 
   isMelon() {
-    console.log(typeof this);
+    return this instanceof Melon
   }
 }
 
