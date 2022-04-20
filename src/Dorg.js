@@ -1,11 +1,12 @@
-import { palette, hyperparams, random } from './constants.js';
+import { palette, actions, random } from './constants.js';
 import { range } from './neat/utils.js';
 import Entity from './Entity.js';
 import Melon from './Melon.js'
 
 class Dorg extends Entity {
-  constructor(col, row, env, parents = null) {
+  constructor(idx, col, row, env, parents = null) {
     super(col, row, env);
+    this.idx = idx;
     this.color = palette.ORG;
     this.grid = env.grid;
     this.lifetime = 0;
@@ -19,6 +20,7 @@ class Dorg extends Entity {
     this.lifetime++;
 
     if (this.beingWatched) {
+      $('#profile-bar').html(`dorg_${this.idx}`);
       $('#x').html(this.c);
       $('#y').html(this.r);
       $('#lifetime').html(this.lifetime);
@@ -93,7 +95,7 @@ class Dorg extends Entity {
   }
 
   actRandom() {
-    return random.choice(hyperparams.ACTIONS);
+    return random.choice(actions);
   }
 
   see() {

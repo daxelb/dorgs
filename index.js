@@ -1,6 +1,7 @@
 'use strict';
 import Engine from './src/Engine.js';
 import newConsole from './src/newConsole.js';
+import { fps } from './src/constants.js'
 
 // sets up new console
 newConsole();
@@ -32,5 +33,5 @@ console_button.onclick = () => {
 
 $('document').ready(function () {
   let engine = new Engine();
-  engine.start(10);
+  engine.start(fps);
 });

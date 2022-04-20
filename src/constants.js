@@ -1,5 +1,14 @@
 import Random from './Random.js';
 
+export const fps = 2;
+export const cellSize = 20;
+export const melonSpawnRate = 1;
+export const startDorgs = 10;
+export let numDorgs = 0;
+export function incNumDorgs() {
+  numDorgs++
+}
+
 export const palette = {
   HIGHLIGHT: 'rgb(255,0,0)',
   OVERRIDE: '#00ff00',
@@ -8,12 +17,7 @@ export const palette = {
   ORG: '#60D4FF',
 };
 
-export const hyperparams = {
-  CELL_SIZE: 32,
-  ACTIONS: ['up', 'down', 'left', 'right'],
-};
-
-export const growChance = 0.3;
+export const actions = ['up','down','left', 'right']
 
 export const random = new Random();
 

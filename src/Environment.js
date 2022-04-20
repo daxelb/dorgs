@@ -3,7 +3,7 @@ import Grid from './Grid.js';
 import Dorg from './Dorg.js';
 import Controller from './Controller.js';
 import Melon from './Melon.js';
-import { random, growChance } from './constants.js';
+import { random, melonSpawnRate, startDorgs, numDorgs, incNumDorgs } from './constants.js';
 import { range } from './neat/utils.js';
 
 class Environment {
@@ -15,6 +15,9 @@ class Environment {
     this.dorgs = [];
     this.total_ticks = 0;
     this.controller = new Controller(this, this.renderer.canvas);
+
+    this.melonsWhole = Math.floor(melonSpawnRate)
+    this.melonsPartial = melonSpawnRate - this.melonsWhole
   }
 
   growMelon() {
@@ -27,11 +30,16 @@ class Environment {
     this.addMelon(melon)
   }
 
+  growMelons() {
+    for (let i = 0; i < this.melonsWhole; i++)
+      this.growMelon()
+    if (random.random() < this.melonsPartial)
+      this.growMelon()
+  }
+
   update() {
     this.total_ticks++;
-    if (random.random() < growChance) {
-      this.growMelon()
-    }
+    this.growMelons()
     for (let dorg of this.dorgs) {
       dorg.update();
     }
@@ -52,7 +60,8 @@ class Environment {
     const xcors = random.sample([...range(this.num_cols)], n)
     for (let i = 0; i < n; i++) {
       x = xcors[i], y = ycors[i]
-      this.addDorg(new Dorg(x, y, this))
+      this.addDorg(new Dorg(numDorgs, x, y, this))
+      incNumDorgs();
     }
   }
 
@@ -64,11 +73,7 @@ class Environment {
   }
 
   origin() {
-    // let center = this.grid.getCenter();
-    // let dorg = new Dorg(center[0], center[1], this);
-    // this.addDorg(dorg);
-    this.addDorgs(10)
-    // this.addMelon(new Melon(center[0] + 1, center[1] + 1, this));
+    this.addDorgs(startDorgs)
   }
 
   addDorg(dorg) {

@@ -1,12 +1,12 @@
 import Environment from './Environment.js';
-import { hyperparams } from './constants.js';
+import { cellSize, fps } from './constants.js';
 
 const min_render_speed = 1000;
 
 class Engine {
   constructor() {
-    this.fps = 1000;
-    this.env = new Environment(hyperparams.CELL_SIZE);
+    this.fps = fps <= 0 ? 1 : fps;
+    this.env = new Environment(cellSize);
     // this.palettecheme = new palettecheme(this.env);
     // this.palettecheme.loadpalettecheme();
     this.env.origin();
@@ -21,11 +21,7 @@ class Engine {
     this.running = false;
   }
 
-  start(fps = 1000) {
-    if (fps <= 0) {
-      fps = 1;
-    }
-    this.fps = fps;
+  start(fps) {
     this.sim_loop = setInterval(() => {
       this.updateSimDeltaTime();
       this.environmentUpdate();
@@ -47,9 +43,10 @@ class Engine {
     this.setUiLoop();
   }
 
-  restart(fps) {
+  restart(fps = null) {
+    if (fps) this.fps = fps
     clearInterval(this.sim_loop);
-    this.start(fps);
+    this.start();
   }
 
   setUiLoop() {

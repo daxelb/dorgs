@@ -132,7 +132,7 @@ body {
   font-size: 25px;
   font-weight: bold;
   text-align: left;
-  padding: 5px;
+  padding: 5px 5px 10px;
   color: rgba(0, 0, 0, 1);
   width: 100%;
 }
