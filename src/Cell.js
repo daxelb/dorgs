@@ -9,7 +9,7 @@ class Cell {
     this.x = x;
     this.y = y;
   }
-
+  
   setOwner(new_owner) {
     this.owner = new_owner;
     this.color = this.owner ? this.owner.color : palette.EMPTY;

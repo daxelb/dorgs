@@ -1,9 +1,10 @@
 import Random from './Random.js';
 
-export const fps = 2;
-export const cellSize = 20;
-export const melonSpawnRate = 1;
-export const startDorgs = 10;
+export const fps = 1.5;
+export const cellSize = 32;
+export const melonSpawnRate = 0.5;
+export const startDorgs = 2;
+
 export let numDorgs = 0;
 export function incNumDorgs() {
   numDorgs++
@@ -13,9 +14,24 @@ export const palette = {
   HIGHLIGHT: 'rgb(255,0,0)',
   OVERRIDE: '#00ff00',
   EMPTY: '#0E1318',
-  MELON: 'rgb(255,154,77, 0.5)',
-  ORG: '#60D4FF',
+  MELON: 'rgb(255,154,77, 0.75)',
+  DORG: '#60D4FF',
+  GREEN: '#00FF00'
 };
+
+export const directions = {
+  NORTH: 0,
+  EAST: 1,
+  SOUTH: 2,
+  WEST: 3
+}
+
+export const moves = {
+  FORWARD: 'F',
+  BACKWARD: 'B',
+  LEFT: 'L',
+  RIGHT: 'R'
+}
 
 export const actions = ['up','down','left', 'right']
 

@@ -36,6 +36,11 @@ class Grid {
     return this.grid[col][row];
   }
 
+  getAdjacent(cell) {
+    let x = cell.col, y = cell.row;
+    return [this.cellAt(x - 1, y), this.cellAt(x + 1, y), this.cellAt(x, y - 1), this.cellAt(x, y + 1)]
+  }
+
   clearCellAt(col, row) {
     if (!this.isValidLoc(col, row)) {
       return;
