@@ -1,5 +1,5 @@
 # dorgs
-### Artificial Life Simulation using Neuroevolution
+### Artificial Life Simulation using Neuroevolution in JS
 dorg = Digital Organism
 
 # Installation
