@@ -23,8 +23,10 @@ class Dorg extends Entity {
   }
 
   updateFacing(move) {
+    console.log(move);
     switch(move) {
       case (moves.FORWARD):
+        console.log('forward!')
         break;
       case (moves.LEFT):
         this.facing = (this.facing + 1) % Object.keys(directions).length;
@@ -64,17 +66,17 @@ class Dorg extends Entity {
     this.updateGrid();
   }
 
-  getLegalActions() {
-    let legalActions = [];
+  getValidDirections() {
+    let validDirections = [];
     if (this.r + 1 < this.grid.rows)
-      legalActions.push('down')
+      validDirections.push(directions.SOUTH)
     if (this.r - 1 >= 0)
-      legalActions.push('up')
+      validDirections.push(directions.NORTH)
     if (this.c + 1 < this.grid.cols)
-      legalActions.push('right')
+      validDirections.push(directions.EAST)
     if (this.c - 1 >= 0)
-      legalActions.push('left')
-    return legalActions
+      validDirections.push(directions.WEST)
+    return validDirections
   }
 
   tryEat() {
@@ -96,7 +98,7 @@ class Dorg extends Entity {
   }
   
   canMove(direction) {
-    return this.getLegalActions().includes(direction)
+    return this.getValidDirections().includes(direction)
   }
 
   do(move) {
@@ -107,6 +109,7 @@ class Dorg extends Entity {
     this.clearCell();
     switch (this.facing) {
       case directions.NORTH:
+        console.log("hey");
         this.r--;
         break;
       case directions.EAST:
