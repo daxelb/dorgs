@@ -1,5 +1,6 @@
 import Environment from './Environment.js';
 import { cellSize, fps } from './constants.js';
+// import Flower from './Flower.js';
 
 const min_render_speed = 1000;
 
@@ -19,12 +20,15 @@ class Engine {
 
     this.actual_fps = 0;
     this.running = false;
+    // this.flower = new Flower();
   }
 
   start(fps) {
     this.sim_loop = setInterval(() => {
       this.updateSimDeltaTime();
       this.environmentUpdate();
+      // this.flower.go();
+      
     }, 1000 / fps);
     this.running = true;
     if (this.fps >= min_render_speed) {
