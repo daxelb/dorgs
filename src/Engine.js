@@ -1,6 +1,6 @@
 import Environment from './Environment.js';
 import { cellSize, fps } from './constants.js';
-
+import Flower from './Flower.js'
 const min_render_speed = 1000;
 
 class Engine {
@@ -19,6 +19,7 @@ class Engine {
 
     this.actual_fps = 0;
     this.running = false;
+    this.flower = new Flower();
   }
 
   start(fps) {

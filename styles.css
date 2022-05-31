@@ -146,7 +146,6 @@ body {
   display: flex;
   position: fixed;
   left: 20px;
-  top: 50%;
   color: white;
   font-size: 40px;
   flex-direction: column;
@@ -201,4 +200,15 @@ table {
 
 #override:hover {
   cursor: pointer;
+}
+
+#flower {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  height: 80vh;
+  width: 80vw;
+  display: flex;
+  position: fixed;
+  left: calc(50% - 80vw / 2);
 }
