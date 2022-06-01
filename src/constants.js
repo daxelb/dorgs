@@ -37,6 +37,22 @@ export const actions = ['up','down','left', 'right']
 
 export const random = new Random();
 
+export const flowerGeneNames = [
+  'segments',
+  'repetitions',
+  'repOffset',
+  'startR',
+  'startG',
+  'startB',
+  'targetR',
+  'targetG',
+  'targetB',
+  'p1Offset Choose',
+  'p2Offset Choose',
+  'p1RadiusCoeff Choose',
+  'p2RadiusCoeff Choose',
+]
+
 // export const mutationProbs = {
 //   "weights": 0.8,
 //   "weight_perturbed": 0.9, // random that a weight is uniformly perturbed if weight is mutated

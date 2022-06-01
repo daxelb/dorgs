@@ -1,55 +1,68 @@
+import { random, flowerGeneNames } from "./constants.js"
+import {geno as generateGeno} from './utils/geno.js';
+import { uniform, integer, hslToRgb, rgbToHsl } from './utils/pheno.js';
 class Flower {
-  constructor(radialSegments) {
-    $('#flower').attr("width", $(window).width());
-    $('#flower').attr("height", $(window).height());
-    this.a = 0.1;
-    this.b = 0.5;
-    this.a2 = 0.1;
-    this.b2 = 1;
-    this.radialSegments = 5;
-    this.repetitions = 50;
-    this.rgb = [0,200,0];
-    this.c = document.getElementById("flower");
+  constructor(geno = null, id=1) {
+    if (!geno)
+      geno = generateGeno(flowerGeneNames)
+    this.geno = geno;
+
+    $(`#flower${id}`).attr("width", $(window).width()/3);
+    $(`#flower${id}`).attr("height", $(window).width()/3);
+    
+    // setting phenotype values
+    this.segments = integer(geno.segments.val, 1, 5);
+    this.repetitions = integer(geno.repetitions.val, 5, 70);
+    this.repOffset = uniform(geno.repOffset, 0, Math.PI)
+    this.p1Offset = uniform(geno.p1Offset.val, 0, 1);
+    this.p2Offset = uniform(geno.p2Offset.val, 0, 1);
+    this.p1RadiusCoeff = uniform(geno.p1RadiusCoeff.val, 0, 1);
+    this.p2RadiusCoeff = uniform(geno.p2RadiusCoeff.val, 0, 1);
+    console.log(geno.targetR.val, geno.targetG.val, geno.targetB.val);
+    
+    const startHue = rgbToHsl(geno.startR.val, geno.startG.val, geno.startB.val)[0]
+    const targetHue = rgbToHsl(geno.targetR.val, geno.targetG.val, geno.targetB.val)[0]
+    this.rgb = hslToRgb(startHue, 0.2, 0.5);
+    this.rgbTarget = hslToRgb(targetHue, 1, 0.5)
+
+    // constants
+    this.c = document.getElementById(`flower${id}`);
     this.ctx = this.c.getContext("2d");
+    this.ctx.strokeStyle = `#00aa00`; // green stroke
     this.originX = this.c.width / 2;
     this.originY = this.c.height / 2;
     this.radius = Math.min(
       Math.abs(this.originX - this.c.width),
       Math.abs(this.originY - this.c.height)
     )
+
+    // draw it!
     this.draw();
   }
 
   drawPetal(theta) {
-    // this.ctx.strokeStyle = `#00FF00`;
     // first stroke
     this.ctx.beginPath();
     this.ctx.moveTo(this.originX, this.originY);
     this.ctx.bezierCurveTo(
-      this.bezierX(theta, this.a, this.radius * this.a2),
-      this.bezierY(theta, this.a, this.radius * this.a2),
-      this.bezierX(theta, this.b, this.radius * this.b2),
-      this.bezierY(theta, this.b, this.radius * this.b2),
+      this.bezierX(theta, this.p1Offset, this.radius * this.p1RadiusCoeff),
+      this.bezierY(theta, this.p1Offset, this.radius * this.p1RadiusCoeff),
+      this.bezierX(theta, this.p2Offset, this.radius * this.p2RadiusCoeff),
+      this.bezierY(theta, this.p2Offset, this.radius * this.p2RadiusCoeff),
       this.bezierX(theta),
       this.bezierY(theta)
     );
     // mirror stroke
     this.ctx.moveTo(this.originX, this.originY);
     this.ctx.bezierCurveTo(
-      this.bezierX(theta, -this.a, this.radius * this.a2),
-      this.bezierY(theta, -this.a, this.radius * this.a2),
-      this.bezierX(theta, -this.b, this.radius * this.b2),
-      this.bezierY(theta, -this.b, this.radius * this.b2),
+      this.bezierX(theta, -this.p1Offset, this.radius * this.p1RadiusCoeff),
+      this.bezierY(theta, -this.p1Offset, this.radius * this.p1RadiusCoeff),
+      this.bezierX(theta, -this.p2Offset, this.radius * this.p2RadiusCoeff),
+      this.bezierY(theta, -this.p2Offset, this.radius * this.p2RadiusCoeff),
       this.bezierX(theta),
       this.bezierY(theta)
     );
-    // this.ctx.stroke();
-    // var grd = this.ctx.createRadialGradient(this.originX, this.originY, this.radius/5, this.originX, this.originY, this.radius)
-    // gradient color should be also a function of which repetition we are on
-    // that way we can make the "leaves" green
-    // but we can make the flowers colorful
-    // grd.addColorStop(1, '#00aa00');
-    // grd.addColorStop(0, '#005500');
+    this.ctx.stroke();
     this.ctx.fillStyle = `rgb(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]})`;
     this.ctx.fill();
   }
@@ -62,23 +75,23 @@ class Flower {
     return this.originY + (radius * Math.sin(theta + offset))
   }
 
+
+
   draw() {
     let theta, i, segmentOffset, radiusDec, j, repOffset;
-    segmentOffset = ((2 * Math.PI) / this.radialSegments);
-    // symmetry is best when the divisor is 2
-    repOffset = ((2 * Math.PI) / 2);
+    segmentOffset = ((2 * Math.PI) / this.segments);
     // might want to adjust how quickly radius decreases
     // controlled by gene?
-    radiusDec = this.radius / (this.repetitions);
-    for (j = 0; j < this.repetitions; j++) {
-      for (i = 0; i < this.radialSegments; i++) {
-        theta = (i * segmentOffset) + (j * repOffset);
+    radiusDec = this.radius / this.repetitions;
+    for (i = 0; i < this.repetitions; i++) {
+      for (j = 0; j < this.segments; j++) {
+        theta = (j * segmentOffset) + (i * this.repOffset);
         this.drawPetal(theta)
       }
       this.radius -= radiusDec;
-      this.rgb[1] -= 200 / this.repetitions
-      this.rgb[2] += 200 / this.repetitions
-      this.rgb[0] += 150 / this.repetitions
+      for (let k = 0; k < 3; k++) {
+        this.rgb[k] += (this.rgbTarget[k] - this.rgb[k]) / this.repetitions;
+      }
     }
   }
 

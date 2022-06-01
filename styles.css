@@ -202,13 +202,36 @@ table {
   cursor: pointer;
 }
 
-#flower {
+#flower1 {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   top: 50%;
-  height: 80vh;
-  width: 80vw;
+  height: 33.3333vw;
+  width: 33vw;
   display: flex;
   position: fixed;
-  left: calc(50% - 80vw / 2);
+  left: calc(50% - 100vw / 2);
+  background-color: black;
+}
+#flower2 {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  height: 33.3333vw;
+  width: 33vw;
+  display: flex;
+  position: fixed;
+  left: 33.3333vw;
+  background-color: black;
+}
+#flower3 {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  height: 33.3333vw;
+  width: 33vw;
+  display: flex;
+  position: fixed;
+  left: 66.6667vw;
+  background-color: black;
 }

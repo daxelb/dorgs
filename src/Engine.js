@@ -1,7 +1,8 @@
 import Environment from './Environment.js';
-import { cellSize, fps } from './constants.js';
+import { cellSize, fps, flowerGeneNames } from './constants.js';
 import Flower from './Flower.js'
 const min_render_speed = 1000;
+import {geno} from './utils/geno.js'
 
 class Engine {
   constructor() {
@@ -19,7 +20,10 @@ class Engine {
 
     this.actual_fps = 0;
     this.running = false;
-    this.flower = new Flower();
+    this.flower1 = new Flower(null, 1);
+    this.flower3 = new Flower(null, 3);
+    const flower2Geno = geno(flowerGeneNames, this.flower1.geno, this.flower3.geno);
+    this.flower2 = new Flower(flower2Geno, 2);
   }
 
   start(fps) {

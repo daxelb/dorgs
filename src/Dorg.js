@@ -23,10 +23,9 @@ class Dorg extends Entity {
   }
 
   updateFacing(move) {
-    console.log(move);
     switch(move) {
       case (moves.FORWARD):
-        console.log('forward!')
+        // console.log('forward!')
         break;
       case (moves.LEFT):
         this.facing = (this.facing + 1) % Object.keys(directions).length;
@@ -62,7 +61,7 @@ class Dorg extends Entity {
     this.override = null;
     this.do(choice);
     if (this.idx == 1)
-      console.log(this.sensors[0].sense());
+      // console.log(this.sensors[0].sense());
     this.updateGrid();
   }
 
@@ -109,7 +108,6 @@ class Dorg extends Entity {
     this.clearCell();
     switch (this.facing) {
       case directions.NORTH:
-        console.log("hey");
         this.r--;
         break;
       case directions.EAST:
