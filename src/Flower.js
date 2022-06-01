@@ -7,22 +7,22 @@ class Flower {
       geno = generateGeno(flowerGeneNames)
     this.geno = geno;
 
-    $(`#flower${id}`).attr("width", $(window).width()/3);
+    $(`#flower${id}`).attr("width", $(window).width()/3)
     $(`#flower${id}`).attr("height", $(window).height());
     
     // setting phenotype values
-    this.segments = integer(geno.segments.val, 1, 5);
-    this.repetitions = integer(geno.repetitions.val, 5, 70);
-    this.repOffset = uniform(geno.repOffset, 0, Math.PI)
-    this.p1Offset = uniform(geno.p1Offset.val, 0, 1);
-    this.p2Offset = uniform(geno.p2Offset.val, 0, 1);
-    this.p1RadiusCoeff = uniform(geno.p1RadiusCoeff.val, 0, 1);
-    this.p2RadiusCoeff = uniform(geno.p2RadiusCoeff.val, 0, 1);
+    this.segments = integer(geno.segments.val, 1, 1);
+    this.repetitions = integer(geno.repetitions.val, 8, 100);
+    this.repOffset = uniform(geno.repOffset, -Math.PI / 2, Math.PI / 2)
+    this.p1Offset = uniform(geno.p1Offset.val, -1.5, 1.5);
+    this.p2Offset = uniform(geno.p2Offset.val, -1.5, 1.5);
+    this.p1RadiusCoeff = uniform(geno.p1RadiusCoeff.val, -1, 1);
+    this.p2RadiusCoeff = uniform(geno.p2RadiusCoeff.val, -1, 1);
     console.log(geno.targetR.val, geno.targetG.val, geno.targetB.val);
     
     const startHue = rgbToHsl(geno.startR.val, geno.startG.val, geno.startB.val)[0]
     const targetHue = rgbToHsl(geno.targetR.val, geno.targetG.val, geno.targetB.val)[0]
-    this.rgb = hslToRgb(startHue, 0.3, 0.5);
+    this.rgb = hslToRgb(startHue, 0.6, 0.5);
     this.rgbTarget = hslToRgb(targetHue, 1, 0.5)
 
     // constants
@@ -62,7 +62,7 @@ class Flower {
       this.bezierX(theta),
       this.bezierY(theta)
     );
-    this.ctx.stroke();
+    // this.ctx.stroke();
     this.ctx.fillStyle = `rgb(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]})`;
     this.ctx.fill();
   }
@@ -83,7 +83,7 @@ class Flower {
     // might want to adjust how quickly radius decreases
     // controlled by gene?
     radiusDec = this.radius / this.repetitions;
-    for (i = 0; i < this.repetitions; i++) {
+    for (i = 0; i <= this.repetitions; i++) {
       for (j = 0; j < this.segments; j++) {
         theta = (j * segmentOffset) + (i * this.repOffset);
         this.drawPetal(theta)
