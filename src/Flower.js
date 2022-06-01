@@ -2,12 +2,13 @@ class Flower {
   constructor(radialSegments) {
     $('#flower').attr("width", $(window).width());
     $('#flower').attr("height", $(window).height());
-    this.a = 0.3;
-    this.b = 1;
-    this.a2 = 0.4;
-    this.b2 = 0.4;
+    this.a = 0.1;
+    this.b = 0.5;
+    this.a2 = 0.1;
+    this.b2 = 1;
     this.radialSegments = 5;
-    this.repetitions = 3;
+    this.repetitions = 50;
+    this.rgb = [0,200,0];
     this.c = document.getElementById("flower");
     this.ctx = this.c.getContext("2d");
     this.originX = this.c.width / 2;
@@ -20,8 +21,9 @@ class Flower {
   }
 
   drawPetal(theta) {
-    this.ctx.strokeStyle = '#00FF00';
+    // this.ctx.strokeStyle = `#00FF00`;
     // first stroke
+    this.ctx.beginPath();
     this.ctx.moveTo(this.originX, this.originY);
     this.ctx.bezierCurveTo(
       this.bezierX(theta, this.a, this.radius * this.a2),
@@ -41,14 +43,14 @@ class Flower {
       this.bezierX(theta),
       this.bezierY(theta)
     );
-    this.ctx.stroke();
-    var grd = this.ctx.createRadialGradient(this.originX, this.originY, this.radius/5, this.originX, this.originY, this.radius)
+    // this.ctx.stroke();
+    // var grd = this.ctx.createRadialGradient(this.originX, this.originY, this.radius/5, this.originX, this.originY, this.radius)
     // gradient color should be also a function of which repetition we are on
     // that way we can make the "leaves" green
     // but we can make the flowers colorful
-    grd.addColorStop(0, '#005500');
-    grd.addColorStop(1, '#00aa00');
-    this.ctx.fillStyle = grd;
+    // grd.addColorStop(1, '#00aa00');
+    // grd.addColorStop(0, '#005500');
+    this.ctx.fillStyle = `rgb(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]})`;
     this.ctx.fill();
   }
 
@@ -74,6 +76,9 @@ class Flower {
         this.drawPetal(theta)
       }
       this.radius -= radiusDec;
+      this.rgb[1] -= 200 / this.repetitions
+      this.rgb[2] += 200 / this.repetitions
+      this.rgb[0] += 150 / this.repetitions
     }
   }
 
