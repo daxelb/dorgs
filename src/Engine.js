@@ -20,16 +20,20 @@ class Engine {
 
     this.actual_fps = 0;
     this.running = false;
-    this.flower1 = new Flower(null, 1);
-    this.flower3 = new Flower(null, 3);
-    const flower2Geno = geno(flowerGeneNames, this.flower1.geno, this.flower3.geno);
-    this.flower2 = new Flower(flower2Geno, 2);
+
+    
   }
 
   start(fps) {
+    let flower2Geno, flower1Geno = geno(flowerGeneNames);
     this.sim_loop = setInterval(() => {
-      this.updateSimDeltaTime();
-      this.environmentUpdate();
+      // this.updateSimDeltaTime();
+      // this.environmentUpdate();
+      this.flower1 = new Flower(flower1Geno, 1);
+      this.flower3 = new Flower(null, 3);
+      flower2Geno = geno(flowerGeneNames, this.flower1.geno, this.flower3.geno);
+      this.flower2 = new Flower(flower2Geno, 2);
+      flower1Geno = flower2Geno;
     }, 1000 / fps);
     this.running = true;
     if (this.fps >= min_render_speed) {

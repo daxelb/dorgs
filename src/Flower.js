@@ -8,7 +8,7 @@ class Flower {
     this.geno = geno;
 
     $(`#flower${id}`).attr("width", $(window).width()/3);
-    $(`#flower${id}`).attr("height", $(window).width()/3);
+    $(`#flower${id}`).attr("height", $(window).height());
     
     // setting phenotype values
     this.segments = integer(geno.segments.val, 1, 5);
@@ -22,7 +22,7 @@ class Flower {
     
     const startHue = rgbToHsl(geno.startR.val, geno.startG.val, geno.startB.val)[0]
     const targetHue = rgbToHsl(geno.targetR.val, geno.targetG.val, geno.targetB.val)[0]
-    this.rgb = hslToRgb(startHue, 0.2, 0.5);
+    this.rgb = hslToRgb(startHue, 0.3, 0.5);
     this.rgbTarget = hslToRgb(targetHue, 1, 0.5)
 
     // constants

@@ -206,7 +206,7 @@ table {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   top: 50%;
-  height: 33.3333vw;
+  height: 100vh;
   width: 33vw;
   display: flex;
   position: fixed;
@@ -217,7 +217,7 @@ table {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   top: 50%;
-  height: 33.3333vw;
+  height: 100vh;
   width: 33vw;
   display: flex;
   position: fixed;
@@ -228,7 +228,7 @@ table {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   top: 50%;
-  height: 33.3333vw;
+  height: 100vh;
   width: 33vw;
   display: flex;
   position: fixed;

@@ -1,6 +1,6 @@
 import Random from './Random.js';
 
-export const fps = 1.5;
+export const fps = 0.5;
 export const cellSize = 32;
 export const melonSpawnRate = 0.5;
 export const startDorgs = 2;
@@ -38,7 +38,7 @@ export const actions = ['up','down','left', 'right']
 export const random = new Random();
 
 export const flowerGeneNames = [
-  'segments',
+  'segments Choose',
   'repetitions',
   'repOffset',
   'startR',
