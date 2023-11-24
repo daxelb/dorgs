@@ -1,0 +1,10 @@
+dorg brain editor
+
+- toggle for NEAT on/off
+
+- drag and drop neural network nodes in the brain:
+- nodes types are chosen from a predefined list, and parameter values can be modified by the usere
+	- inputs
+	- activations
+	- hidden layers
+	- outputs

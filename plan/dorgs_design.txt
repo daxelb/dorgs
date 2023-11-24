@@ -1,0 +1,45 @@
+Bugger
+    - One queen makes 1000 offspring
+    - if queen dies, colony collapses
+    - shared thoughts
+    - queen lies in egg
+
+Bee
+    - Suicidal Stinger
+    - Pollinator
+    - Produces Honey
+    - Roles
+        - Queen
+        - Worker
+        - Nurse
+        - Soldier
+    - sees in UV spectrum 
+    - flies
+
+Ant
+    - Pheromone Trails
+    - antenae
+    - extremely strong
+    - Ant Hive = dug not built
+    - Build Bridges
+
+Spider
+    - net casting (versus jumping spider)
+    - creates webs
+    - can sense when and where web is disturbed by other organisms
+    - lays egg with tons and tons of offspring
+    - eats mate
+    - can catch flying insects well
+    - bundles prey in web
+
+Moth / Butterfly
+    - (Moth) uses moon or stars to orientate
+        - therefore attracted to light
+
+Cricket
+
+Glow Worm/Firefly
+
+Aphids
+
+Lichen

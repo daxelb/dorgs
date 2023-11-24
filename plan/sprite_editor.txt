@@ -1,0 +1,8 @@
+in-app sprite editor with conditional textures and coloring
+
+- users can add a colored pixel that draws from specific values of a dorg to show a color
+- what pixel this is and how the color functions works can be defined by the user
+- colored pixels can be grouped to have the same color function? (not necessary, but nice for QOL)
+- EUREKA
+	-  every pixel has a function that defines its color including transparancy.
+	- so you can add/remove the pixels if some user-defied condition is met

@@ -1,0 +1,19 @@
+- Lichen:
+    - moonlight
+    - sunlight
+    - sharing energy
+    - storing energy
+
+    - reproduction
+        - tree and branching
+        - grow direction - has chance to mutate
+
+        - chance to spawn matrix
+
+
+simple cellular automata idea:
+cell increases in yellow if surrounded by red
+cell increases in red if surrounded by yellow
+but equalizing at orange is not good
+    (can make this a slider so we can see different evolution for cbanging that rule)
+    maybe orange makes both red and yellow decrease in adjacent cells
